@@ -15,7 +15,7 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
+	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc','coc']
 	let g:bundle_group += ['leaderf']
 endif
 
@@ -148,7 +148,6 @@ endif
 " 增强插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
-
 	" 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
 	Plug 'terryma/vim-expand-region'
 
@@ -311,10 +310,18 @@ if index(g:bundle_group, 'nerdtree') >= 0
 	let g:NERDTreeMinimalUI = 1
 	let g:NERDTreeDirArrows = 1
 	let g:NERDTreeHijackNetrw = 0
+	let g:vj_nerdtree_compatible = 1
 	noremap <space>nn :NERDTree<cr>
 	noremap <space>no :NERDTreeFocus<cr>
 	noremap <space>nm :NERDTreeMirror<cr>
 	noremap <space>nt :NERDTreeToggle<cr>
+	" 默认是否用 l 代替 o 打开文件
+	let g:NERDTreeMapActivateNode= 'l'
+	" let g:NERDTreeMapActivateNode= 'l'
+	" 目录树菜单操作
+	let g:NERDTreeMapMenu = 'o'
+	" 自动打开
+	autocmd vimenter * NERDTree
 endif
 
 
@@ -410,6 +417,18 @@ if index(g:bundle_group, 'echodoc') >= 0
 	set noshowmode
 	let g:echodoc#enable_at_startup = 1
 endif
+
+
+
+"----------------------------------------------------------------------
+" coc
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'coc') >= 0
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	let g:coc_disable_startup_warning = 1
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+endif
+
 
 
 "----------------------------------------------------------------------
