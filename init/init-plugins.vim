@@ -16,7 +16,7 @@
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc','coc']
-	let g:bundle_group += ['leaderf']
+	let g:bundle_group += ['leaderf','vue']
 endif
 
 
@@ -34,7 +34,7 @@ endfunc
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
 "----------------------------------------------------------------------
-call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
+call plug#begin(get(g:, 'bundle_home', '~/.vim/plugins'))
 
 
 "----------------------------------------------------------------------
@@ -118,6 +118,7 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" Git 支持
 	Plug 'tpope/vim-fugitive'
+
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
@@ -322,6 +323,11 @@ if index(g:bundle_group, 'nerdtree') >= 0
 	let g:NERDTreeMapMenu = 'o'
 	" 自动打开
 	autocmd vimenter * NERDTree
+	" NerdTree没有箭头
+	let g:NERDTreeDirArrows = 0
+
+	let g:NERDTreeDirArrowExpandable = '+'
+	let g:NERDTreeDirArrowCollapsible = '-'
 endif
 
 
@@ -535,6 +541,17 @@ if index(g:bundle_group, 'leaderf') >= 0
 		noremap <m-n> :CtrlPBuffer<cr>
 	endif
 endif
+
+
+if index(g:bundle_group, 'vue') >= 0
+	" prettier
+	Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+	let g:prettier#autoformat = 1
+	let g:prettier#autoformat_config_present = 0
+	let g:prettier#autoformat_require_pragma = 0
+	let g:prettier#autoformat_config_files = ['javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
+endif
+
 
 
 "----------------------------------------------------------------------
